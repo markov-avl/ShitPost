@@ -1,0 +1,11 @@
+{% extends 'page.html.twig' %}
+
+{% block title %}ShitPost{% endblock %}
+{% block logohref %}{{ path('app_index') }}{% endblock %}
+
+{% block buttons %}
+    {% include 'buttons/login.html.twig' %}
+    {% include 'buttons/signup.html.twig' %}
+{% endblock %}
+
+{% block nopostsmessage %}It looks like no one has any posts :({% endblock %}

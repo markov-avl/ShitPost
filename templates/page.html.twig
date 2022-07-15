@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header>
+        <div class="container-fluid d-flex h-100 align-items-center p-0">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
+                <div class="container-fluid" id="navbarContainer">
+                    <a class="navbar-brand" href="{% block logohref %}{% endblock %}">
+                        <img src="{{ asset('static/shit.png') }}" alt="" width="24" height="24"
+                             class="d-inline-block align-text-top">
+                        ShitPost
+                    </a>
+                    <button class="navbar-toggler" data-bs-target="#navbarNavAltMarkup"
+                            aria-controls="navbarNavAltMarkup"
+                            type="button" data-bs-toggle="collapse" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">{% block myposts %}{% endblock %}</div>
+                        <div class="navbar-nav">{% block buttons %}{% endblock %}</div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    {% if posts is empty %}
+        <p class="text-center fs-1 m-0 m-auto pt-5 pb-5">{% block nopostsmessage %}{% endblock %}</p>
+    {% else %}
+        <div class="wrapper m-0 m-auto pb-3">
+            {% for post in posts %}
+                <div class="card w-100 mt-3" data-id="{{ post.id }}">
+                    <div class="card-body">
+                        <p class="card-text username d-flex justify-content-between">
+                            <span class="card-title fs-5 mb-0"><strong>@{{ post.username }}</strong></span>
+                            {% if app.user is not null and app.user.username == post.username %}
+                                <span class="align-items-center">
+                                    {% include 'buttons/editpost.html.twig' %}
+                                    {% include 'buttons/deletepost.html.twig' %}
+                                </span>
+                            {% endif %}
+                        </p>
+                        {% for line in post.message|split("\n") %}
+                            <p class="card-text line mb-0">{{ line }}</p>
+                        {% endfor %}
+                        <p class="card-bottom card-text mt-2 d-flex justify-content-between">
+                            <small class="text-muted">{{ post.date|date('H:m Y.m.d') }}</small>
+                            {% if app.user is null %}
+                                <span class="d-flex align-self-center" data-id="{{ post.id }}">
+                                    {% if post.shit_count > 0 %}
+                                        <span class="me-2">{{ post.shit_count }}</span>
+                                        <img src="{{ asset('static/shit.png') }}" alt="" width="24" height="24"
+                                             class="d-inline-block align-text-top">
+                                    {% endif %}
+                                </span>
+                            {% else %}
+                                <span class="d-flex align-self-center" data-id="{{ post.id }}" role="button">
+                                    {% if post.shit_count > 0 %}
+                                        <span class="me-2">{{ post.shit_count }}</span>
+                                    {% endif %}
+                                    {% if post.shitted %}
+                                        <img src="{{ asset('static/shit.png') }}" alt="" width="24" height="24"
+                                             class="shit d-inline-block align-text-top">
+                                    {% else %}
+                                        <img src="{{ asset('static/shit.png') }}" alt="" width="24" height="24"
+                                             class="non-shit d-inline-block align-text-top">
+                                    {% endif %}
+                                </span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% include 'modals/editpost.html.twig' %}
+        {% include 'modals/deletepost.html.twig' %}
+    {% endif %}
+    {% block modals %}{% endblock %}
+
+    {% if app.user != null %}
+        <script src="{{ asset('static/js/authorized.js') }}"></script>
+    {% endif %}
+{% endblock %}

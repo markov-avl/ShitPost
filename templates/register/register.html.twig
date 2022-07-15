@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+    <header>
+        <div class="container-fluid d-flex h-100 align-items-center p-0">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
+                <div class="container-fluid" id="navbarContainer">
+                    <a class="navbar-brand" href="{{ path('app_index') }}">
+                        <img src="{{ asset('static/shit.png') }}" alt="" width="24" height="24"
+                             class="d-inline-block align-text-top">
+                        ShitPost
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="wrapper mt-3 m-0 m-auto pb-3">
+        {{ form_start(registrationForm) }}
+            <div class="mb-1">
+                {{ form_label(registrationForm.username) }}
+                <div class="input-group">
+                    <div class="input-group-text">@</div>
+                    {{ form_widget(registrationForm.username) }}
+                </div>
+            </div>
+            <div id="signUpInputUsernameValidationLabel" class="mb-2 text-danger"></div>
+            <div class="mb-1">
+                {{ form_label(registrationForm.plainPassword.first) }}
+                {{ form_widget(registrationForm.plainPassword.first) }}
+            </div>
+            <div id="signUpInputPasswordValidationLabel" class="mb-2 text-danger"></div>
+            <div class="mb-1">
+                {{ form_label(registrationForm.plainPassword.second) }}
+                {{ form_widget(registrationForm.plainPassword.second) }}
+            </div>
+            <div id="signUpInputReEnterPasswordValidationLabel" class="mb-2 text-danger"></div>
+            <div id="signUpFormValidationLabel" class="mb-2 text-danger"></div>
+            <a class="d-flex align-items-center mt-2 mb-2" href="{{ path('app_login') }}">
+                <div>Have got an account?</div>
+            </a>
+            <button class="btn btn-primary" type="submit">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

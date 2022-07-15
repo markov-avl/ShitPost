@@ -1,0 +1,55 @@
+#navbarContainer {
+    max-width: 1024px;
+}
+
+html, body {
+    height: 100%;
+}
+
+textarea {
+    resize: none;
+    height: calc(100vh - 300px);
+}
+
+.navbar-nav {
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.wrapper {
+    max-width: 1024px;
+}
+
+.shit, .non-shit {
+    transition: .25s;
+}
+
+.shit, .non-shit:hover {
+    opacity: 1;
+}
+
+.non-shit, .shit:hover {
+    opacity: .5;
+}
+
+.post-control {
+    opacity: .25;
+    transition: .25s;
+}
+
+.post-control:hover {
+    opacity: .5;
+}
+
+img {
+    -webkit-user-drag: none !important;
+}
+
+@media screen and (min-width: 992px) {
+    #navbarNavAltMarkup {
+        justify-content: space-between;
+    }
+    .navbar-nav {
+        padding: 0;
+    }
+}

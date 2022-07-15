@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}500{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center h-100">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <p class="text-center fs-1 m-3">500</p>
+            <a class="navbar-brand p-0 me-0 d-flex justify-content-center" href="{{ path('app_index') }}">
+                <img class="img-fluid w-75" src="{{ asset('static/shit.png') }}" role="button" alt="">
+            </a>
+            <p class="text-center fs-1 m-3">Page Not Found</p>
+        </div>
+    </div>
+{% endblock %}

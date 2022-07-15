@@ -1,0 +1,25 @@
+{% extends 'page.html.twig' %}
+
+{% block title %}Home{% endblock %}
+{% block logohref %}{{ path('app_home') }}{% endblock %}
+
+{% block myposts %}
+    <a class="nav-link" href="{{ path('app_my_posts') }}">My posts</a>
+    <a class="nav-link" href="{{ path('app_my_shits') }}">My sheets</a>
+{% endblock %}
+
+{% block buttons %}
+    <div class="opacity-50 d-flex align-items-center">@{{ app.user.username }}</div>
+    {% include 'buttons/newpost.html.twig' %}
+    {% include 'buttons/logout.html.twig' %}
+{% endblock %}
+
+{% block nopostsmessage %}
+    It looks like no one has any posts :(<br>
+    Be the first!<br>
+    {% include 'buttons/newpost.html.twig' %}
+{% endblock %}
+
+{% block modals %}
+    {% include 'modals/newpost.html.twig' %}
+{% endblock %}
